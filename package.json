@@ -1,0 +1,24 @@
+{
+  "name": "liri",
+  "version": "1.0.0",
+  "description": "",
+  "main": "liri.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jlipschitz/liri.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jlipschitz/liri/issues"
+  },
+  "homepage": "https://github.com/Jlipschitz/liri#readme",
+  "dependencies": {
+    "request": "^2.71.0",
+    "spotify": "^0.3.0",
+    "twitter": "^1.2.5"
+  }
+}
