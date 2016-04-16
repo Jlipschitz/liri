@@ -33,10 +33,10 @@ function grabTwitter() {
         if (!error) {
             for (var i = 0; i < tweets.length; i++) {
                 if (tweets[i] != undefined) {
-                    addSpace();
+                    separators.addSpace();
                     console.log(tweets[i].text);
-                    addSpace();
-                    addBreak();
+                    separators.addSpace();
+                    separators.addBreak();
                 }
             }
         } else {
@@ -58,15 +58,15 @@ function grabSpotify() {
         for (var i = 0; i < data.tracks.items.length; i++) {
 
             if (data.tracks.items[i] != undefined) {
-                addSpace();
+                separators.addSpace();
                 console.log('List #' + resultNum);
                 console.log('Artist: ', data.tracks.items[i].artists[0].name);
                 console.log('Track: ', data.tracks.items[i].name);
                 console.log('Song URL: ', data.tracks.items[i].href);
                 console.log('Album: ', data.tracks.items[i].album.name);
-                addSpace();
-                addBreak();
-                addSpace();
+                separators.addSpace();
+                separators.addBreak();
+                separators.addSpace();
             }
             resultNum++;
         }
@@ -78,7 +78,7 @@ function grabMovie() {
     request('http://www.omdbapi.com/?t=' + movieTitle + '&y=&plot=short&r=json', function(error, response, jbody) {
         if (!error && response.statusCode == 200) {
             jbody = JSON.parse(jbody);
-            addSpace();
+            separators.addSpace();
             console.log('Title: ' + jbody.Title);
             console.log('Year: ' + jbody.Year);
             console.log('IMDB Rating: ' + jbody.imdbRating);
@@ -86,8 +86,8 @@ function grabMovie() {
             console.log('Language: ' + jbody.Language);
             console.log('Plot: ' + jbody.Plot);
             console.log('Actors: ' + jbody.Actors);
-            addSpace();
-            addBreak();
+            separators.addSpace();
+            separators.addBreak();
         } else {
             console.log('Error occurred: ' + error);
             return;
@@ -95,10 +95,11 @@ function grabMovie() {
     })
 };
 
-function addBreak() {
-    console.log("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
-}
-
-function addSpace() {
-    console.log("  ");
+var separators = {
+    addBreak: function() {
+        console.log("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
+    },
+    addSpace: function() {
+        console.log("  ");
+    }
 }
