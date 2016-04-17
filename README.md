@@ -1,7 +1,5 @@
-# liri
- 
- 
-### node app in which you can request song, movie or tweet information!
+
+### Liri is a node app in which you can request song, movie or tweet information!
 
 
 
