@@ -4,4 +4,4 @@
 
 
 #### Instructions:
-#### 1: Type co
+#### Type my-tweets, spotify-this-song, movie-this or do-what-it-says. This will run your second argument and collect the data from the respective API.
