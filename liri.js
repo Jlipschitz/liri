@@ -1,23 +1,15 @@
 var request = require('request');
 var keys = require('./.gitignore/keys.js');
-
+var fs = require('fs');
 
 switch (process.argv[2]) {
-    case "my-tweets":
-        grabTwitter();
-        break;
-    case "spotify-this-song":
-        grabSpotify();
-        break;
-    case "movie-this":
-        grabMovie()
-        break;
-    case "do-what-it-says":
-        break;
-    default:
-        console.log("Please enter a valid entry. You can type: my-tweets, spotify-this-song, movie-this or do-what-it-says")
+    case "my-tweets":grabTwitter(); break;
+    case "spotify-this-song": grabSpotify(); break;
+    case "movie-this": grabMovie(); break;
+    case "do-what-it-says": grabDoWhatItSays(); break;
+    default: console.log("Please enter a valid entry. You can type: my-tweets, spotify-this-song, movie-this or do-what-it-says")
 }
-
+//grab mytweet information and display it
 function grabTwitter() {
     var Twitter = require('twitter');
     var client = new Twitter({
@@ -45,9 +37,14 @@ function grabTwitter() {
     });
 };
 
-function grabSpotify() {
+//grab users entry for spotify and return song information
+function grabSpotify(enterThis) {
     var spotify = require('spotify');
     var songTitle = process.argv[3] != "" ? process.argv[3] : "what's my age again";
+
+    //change to use data inside random.txt if user prompts "do-what-it-says"
+    if(process.argv[2] === "do-what-it-says") { songTitle = enterThis}
+
     spotify.search({ type: 'track', query: songTitle }, function(err, data) {
         if (err) {
             console.log('Error occurred: ' + err);
@@ -72,7 +69,7 @@ function grabSpotify() {
         }
     });
 }
-
+//grab users entry for move and return movie information
 function grabMovie() {
     var movieTitle = process.argv[3] != "" ? process.argv[3] : "Mr. Nobody"
     request('http://www.omdbapi.com/?t=' + movieTitle + '&y=&plot=short&r=json', function(error, response, jbody) {
@@ -94,7 +91,18 @@ function grabMovie() {
         }
     })
 };
+//grab random.txt information and run it
+function grabDoWhatItSays(){
+    fs.readFile("random.txt", 'utf8', function(err, data){
+        if (err) throw err;
+        //run below if no error is returned
+        var things = data.split(',');
+        var enterThis = things[1];
 
+        grabSpotify(enterThis);
+    });
+}
+//create line breaks and spacers
 var separators = {
     addBreak: function() {
         console.log("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
